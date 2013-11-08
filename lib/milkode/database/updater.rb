@@ -213,7 +213,9 @@ module Milkode
         when "directory"
           searchDirectory(dirname, packname, next_path, depth + 1)
         when "link"
-          searchDirectory(dirname, packname, next_path, depth + 1)
+          if depth <=1
+            searchDirectory(dirname, packname, next_path, depth + 1)
+          end
         when "file"
           unless ignoreFile?(fpath, next_path)
             db_add_file(dirname, next_path) # shortpathの先頭に'/'が付いているのが気になる
